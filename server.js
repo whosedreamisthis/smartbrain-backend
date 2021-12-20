@@ -10,8 +10,8 @@ const database = {
         {
             id: '123',
             name: 'John',
-            password: "cookies",
             email:'john@gmail.com',
+            password:'cookies',
             entries: 0,
             joined: new Date()
         },
@@ -19,8 +19,7 @@ const database = {
             id: '124',
             name: 'Sally',
             email:'sally@gmail.com',
-            password: "bananas",
-
+            password:'milk',
             entries: 0,
             joined: new Date()
         }
@@ -38,20 +37,12 @@ app.get('/',(req,res) => {
 })
 
 app.post('/signin',(req,res) => {
-    bcrypt.compare("balls", "2a$10$eaIiogeEJi2DAqMXlybo5OROWfBUiHwbDJY\Rjqss7Yl\b5QSOSvC", function(err, res) {
-        console.log("balls",res);
-    });
-     
-    // As of bcryptjs 2.4.0, compare returns a promise if callback is omitted:
-    bcrypt.compare("not_balls", "2a$10$eaIiogeEJi2DAqMXlybo5OROWfBUiHwbDJY\Rjqss7Yl\b5QSOSvC").then((res) => {
-        console.log("not_balls",res);
-    });
     if (req.body.email === database.users[0].email &&
          req.body.password === database.users[0].password) {
-             res.json('success');
+            res.json(database.users[0]);
          }
          else {
-             res.status(400).json("Error logging in.");
+             res.status(400).json("Error logging in. ", req);
          }
 });
 
