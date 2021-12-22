@@ -2,16 +2,16 @@ const express = require('express');
 const bcrypt = require('bcryptjs');
 const cors = require('cors');
 const knex = require ('knex');
-
-
-
+ 
+   
+require('dotenv').config();
 const register = require('./controllers/register');
 const profile = require('./controllers/profile');
 const signin = require('./controllers/signin');
 const image = require('./controllers/image');
 
 
-const dotenv = require('dotenv');
+//const dotenv = require('dotenv');
 
 
 
@@ -52,10 +52,12 @@ app.put('/image',image.handleImage(db));
 app.post('/imageurl',(req,res)=>{image.handleAPICall(req,res)});
 
 
-
-app.listen(3000, ()=>{
-    console.log('app is running on port 3000');
+const PORT = process.env.PORT;
+app.listen(PORT || 3000, ()=>{
+    console.log(`app is running on port ${PORT}`);
 });
+
+console.log(process.env.CLARIFAI_API_KEY);
 
 /*
 / ---> res this is working
