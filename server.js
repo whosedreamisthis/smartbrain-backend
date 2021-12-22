@@ -39,7 +39,7 @@ app.use(express.json());
 
 
 app.get('/',(req,res) => {
-    res.send(db.users);
+    res.send("It's working");
 })
 
 app.post('/signin', signin.handleSignin(db,bcrypt));
@@ -52,9 +52,8 @@ app.put('/image',image.handleImage(db));
 app.post('/imageurl',(req,res)=>{image.handleAPICall(req,res)});
 
 
-const PORT = process.env.PORT;
-app.listen(PORT || 3000, ()=>{
-    console.log(`app is running on port ${PORT}`);
+app.listen(process.env.PORT || 3000, ()=>{
+    console.log(`app is running on port ${process.env.PORT}`);
 });
 
 console.log(process.env.CLARIFAI_API_KEY);
